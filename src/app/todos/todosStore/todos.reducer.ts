@@ -5,6 +5,14 @@ const initialState = {
   todos: [],
 };
 
-const todosReducer = createReducer(initialState, 
-    // on(todosActions.addTodo, (state, action)=> state.todos.push(action))
+const todosReducer = createReducer(
+  initialState,
+  on(todosActions.addTodo, (state: any, action: any) => {
+    return {
+      ...state,
+      todos: [...state.todos, action.payload],
+    };
+  })
 );
+
+export default { todosReducer };
