@@ -7,6 +7,7 @@ const initialState = {
 
 const todosReducer = createReducer(
   initialState,
+  // on(todosActions.loadTodo, (state: any) => state),
   on(todosActions.addTodo, (state: any, action: any) => {
     return {
       ...state,

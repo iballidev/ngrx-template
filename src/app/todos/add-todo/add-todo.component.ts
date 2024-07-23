@@ -23,5 +23,6 @@ export class AddTodoComponent {
     };
     console.log('payload: ', payload);
     this.store.dispatch(todosActions.addTodo({ payload: payload }));
+    this.todo = '';
   }
 }
