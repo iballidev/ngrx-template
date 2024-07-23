@@ -20,6 +20,7 @@ export class AddTodoComponent {
     const payload = {
       id: new Date().getTime().toString(),
       todo: this.todo,
+      isDone: false,
     };
     console.log('payload: ', payload);
     this.store.dispatch(todosActions.addTodo({ payload: payload }));
