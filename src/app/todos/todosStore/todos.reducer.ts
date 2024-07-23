@@ -11,7 +11,7 @@ const todosReducer = createReducer(
   on(todosActions.addTodo, (state: any, action: any) => {
     return {
       ...state,
-      todos: [...state.todos, action.payload],
+      todos: [action.payload, ...state.todos],
     };
   }),
   on(todosActions.updateTodo, (state: any, action: any) => {
