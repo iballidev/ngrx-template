@@ -23,7 +23,6 @@ export class TodoListComponent implements OnInit {
   }
 
   removeTodo(id: number) {
-    console.log("id: ", id)
     this.store.dispatch(todosActions.removeTodo({ id }));
   }
 }
