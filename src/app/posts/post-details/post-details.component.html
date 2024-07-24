@@ -1,0 +1,39 @@
+<!-- <p>post-details works!</p> -->
+<div class="bg-gray-100">
+
+  <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="px-4 py-6 sm:px-0">
+      <div class="bg-white shadow sm:rounded-lg p-6">
+        <h1 class="text-2xl font-bold mb-2">{{post?.title}}</h1>
+        <div class="flex items-center mb-4">
+          <!-- <img class="h-10 w-10 rounded-full" src="author-image.jpg" alt="Author"> -->
+          <div class="ml-3">
+            <p class="text-sm font-medium text-gray-900">Author Name</p>
+            <p class="text-sm text-gray-500">Published on July 24, 2024</p>
+          </div>
+        </div>
+
+        <div class="prose max-w-none">
+          <div>
+            {{post?.body}}
+          </div>
+          <!-- Add more content as needed -->
+        </div>
+
+        <div class="mt-8">
+          <h3 class="text-lg font-semibold text-gray-900">Comments</h3>
+          <div class="mt-4">
+            <div class="flex items-start">
+              <!-- <img class="h-10 w-10 rounded-full" src="commenter-image.jpg" alt="Commenter"> -->
+              <div class="ml-3">
+                <p class="text-sm font-medium text-gray-900">Commenter Name</p>
+                <p class="mt-1 text-sm text-gray-700">This is a comment on the blog post. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              </div>
+            </div>
+            <!-- Add more comments as needed -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

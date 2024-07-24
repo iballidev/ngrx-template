@@ -5,7 +5,10 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { Post, PostService } from '../../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-post',
@@ -20,7 +23,7 @@ export class AddPostComponent implements OnInit {
   imgUrl: any;
   isReadyToBeSaved!: boolean;
   isFile!: boolean;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _postSvc: PostService, private router: Router) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -33,9 +36,9 @@ export class AddPostComponent implements OnInit {
 
   buildForm() {
     this.addPostForm = this.fb.group({
-      title: new FormControl('Hello'),
-      body: new FormControl('Hello'),
-      tags: new FormControl('Hello'),
+      title: new FormControl('', [Validators.required]),
+      body: new FormControl('', [Validators.required]),
+      tags: new FormControl(''),
     });
   }
 
@@ -66,7 +69,24 @@ export class AddPostComponent implements OnInit {
   }
 
   onSubmit(data: FormGroup) {
-    console.log('data: ', data.value);
+    if (data.valid) {
+      const payload: Post = {
+        ...data.value,
+        featuredImage: this.imgUrl,
+      };
+
+      this._postSvc.sendPost(payload).subscribe({
+        next: (response: any) => {
+          if (response) {
+            data.reset();
+            this.router.navigate(['/posts']);
+          }
+        },
+        error: (err: any) => {
+          console.log('Error: ', err);
+        },
+      });
+    }
   }
 
   backHistory() {

@@ -12,9 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class ScreenComponent implements OnInit {
   @Input() count: number = 0;
-  count$!: Observable<number>;
+  count$!: Observable<{ counter: number }>;
 
-  constructor(private store: Store<{ counter: number }>) {}
+  constructor(private store: Store<{ counter: { counter: number } }>) {}
 
   ngOnInit(): void {
     this.count$ = this.store.select('counter');

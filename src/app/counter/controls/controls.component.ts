@@ -25,7 +25,7 @@ export class ControlsComponent {
   //   this.reset.emit();
   // }
 
-  constructor(private store: Store<{ counter: number }>) {}
+  constructor(private store: Store<{ counter: {counter: number} }>) {}
 
   handleIncrease() {
     this.store.dispatch(counterActions.increment());
