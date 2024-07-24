@@ -7,7 +7,7 @@ const initialState = {
 
 const todosReducer = createReducer(
   initialState,
-  // on(todosActions.loadTodo, (state: any) => state),,
+  // on(todosActions.loadTodo, (state: any) => state),
   on(todosActions.addTodo, (state: any, action: any) => {
     return {
       ...state,
@@ -15,21 +15,17 @@ const todosReducer = createReducer(
     };
   }),
   on(todosActions.updateTodo, (state: any, action: any) => {
-    let isExist = state.todos.indexOf(action.todo);
-    console.log('isExist: ', isExist);
-    if (isExist) {
-    }
-    let newList = state.todos.filter(
-      (_item: any) => _item.id != action.todo.id
-    );
-    console.log('newList: ', newList);
-
-    let updatedList = [...newList, { ...action.todo, isDone: true }];
-
-    // let newList = state.todos.filter((todo: any) => todo.id != action.id);
+    let stateList = state.todos.map((item: any) => {
+      if (item) {
+        return item.id === action.todo.id
+          ? { ...item, isDone: !item.isDone }
+          : item;
+      }
+      return;
+    });
     return {
       ...state,
-      todos: updatedList,
+      todos: stateList,
     };
   }),
   on(todosActions.removeTodo, (state: any, action: any) => {

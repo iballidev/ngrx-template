@@ -16,16 +16,14 @@ export class TodoListComponent implements OnInit {
   constructor(private store: Store<{ todos: [] }>) {}
   ngOnInit(): void {
     this.todos$ = this.store.select('todos');
-    console.log('this.todos$: ', this.todos$);
   }
 
   doTodo(todo: any) {
-    console.warn('todo: ', todo);
     this.store.dispatch(todosActions.updateTodo({ todo }));
   }
 
   removeTodo(id: number) {
-    console.warn('id: ', id);
+    console.log("id: ", id)
     this.store.dispatch(todosActions.removeTodo({ id }));
   }
 }

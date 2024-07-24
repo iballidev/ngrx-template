@@ -13,6 +13,7 @@ import todosActions from '../todosStore/todos.actions';
 })
 export class AddTodoComponent {
   todo!: string;
+  errorMsg!: string;
 
   constructor(private store: Store<{ todo: any }>) {}
 
@@ -22,8 +23,11 @@ export class AddTodoComponent {
       todo: this.todo,
       isDone: false,
     };
-    console.log('payload: ', payload);
-    this.store.dispatch(todosActions.addTodo({ payload: payload }));
-    this.todo = '';
+    if (this.todo) {
+      this.store.dispatch(todosActions.addTodo({ payload: payload }));
+      this.todo = '';
+    } else {
+      this.errorMsg = 'Todo cannot be empty';
+    }
   }
 }
