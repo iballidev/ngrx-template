@@ -5,7 +5,7 @@
   <li class="flex items-center justify-between p-2 border-b border-gray-200" *ngFor="let item of (todos$ | async).todos">
     <div class="flex items-center">
       <input type="checkbox" [value]="item?.id" class="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" (change)="doTodo(item)" [checked]="item?.isDone">
-      <span class="text-lg before:content=['']" [ngClass]="{'flex items-center relative before:block before:h-[2px] before:bg-red-500 before:w-full before:absolute': item?.isDone}">{{item?.todo}}</span>
+      <span class="text-lg before:content=['']" [ngClass]="{'text-red-500 flex items-center relative before:block before:h-[2px] before:bg-red-500 before:w-full before:absolute': item?.isDone}">{{item?.todo}}</span>
     </div>
     <button class="text-red-500 hover:text-red-700" (click)="removeTodo(item?.id)">Delete</button>
   </li>
