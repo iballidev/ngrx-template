@@ -27,7 +27,11 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="image">
           Featured Image
         </label>
-        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="image" type="file">
+        <input (change)="onChange($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none" id="image" type="file">
+        
+        <div class="h-24 w-40 overflow-hidden mt-4" *ngIf="imgUrl">
+            <img [src]="imgUrl" alt="Post featured image" class="h-full">
+        </div>
       </div>
       <div class="flex items-center justify-between">
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
