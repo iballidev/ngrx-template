@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PostService } from '../../services/post.service';
 import { Store } from '@ngrx/store';
 import { PostsState } from '../postStore/posts.state';
 import postsActions from '../postStore/posts.actions';
 import { Observable } from 'rxjs';
-import { getPostsState } from '../postStore/posts.selector';
+import { selectFeaturePostDetails } from '../postStore/posts.selector';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -31,6 +30,6 @@ export class PostDetailsComponent implements OnInit {
 
   getPostDetails(id: string) {
     this.store.dispatch(postsActions.loadPostDetails({ id }));
-    this.post$ = this.store.select(getPostsState);
+    this.post$ = this.store.select(selectFeaturePostDetails);
   }
 }

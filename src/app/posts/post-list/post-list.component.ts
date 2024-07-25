@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PostService } from '../../services/post.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PostsState } from '../postStore/posts.state';
 import { Store } from '@ngrx/store';
 import postsActions from '../postStore/posts.actions';
 import { Observable } from 'rxjs';
-import { getPostsState } from '../postStore/posts.selector';
+import { selectFeaturePosts } from '../postStore/posts.selector';
 
 @Component({
   selector: 'app-post-list',
@@ -22,6 +21,6 @@ export class PostListComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(postsActions.loadPosts());
-    this.posts$ = this.store.select(getPostsState);
+    this.posts$ = this.store.select(selectFeaturePosts);
   }
 }

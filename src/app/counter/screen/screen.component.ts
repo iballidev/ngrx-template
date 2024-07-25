@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CounterState } from '../counterStore/counter.state';
-import { getCounterState } from '../counterStore/counter.selector';
+import { getCounterState, selectFeatureCounter } from '../counterStore/counter.selector';
 
 @Component({
   selector: 'app-screen',
@@ -14,11 +14,11 @@ import { getCounterState } from '../counterStore/counter.selector';
 })
 export class ScreenComponent implements OnInit {
   @Input() count: number = 0;
-  count$!: Observable<CounterState>;
+  count$!: Observable<number>;
 
   constructor(private store: Store<CounterState>) {}
 
   ngOnInit(): void {
-    this.count$ = this.store.select(getCounterState);
+    this.count$ = this.store.select(selectFeatureCounter);
   }
 }

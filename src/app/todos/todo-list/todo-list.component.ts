@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import todosActions from '../todosStore/todos.actions';
-import { getTodosState } from '../todosStore/todos.selector';
+import { selectFeatureTodos } from '../todosStore/todos.selector';
 import { TodosState } from '../todosStore/todos.state';
 // import { selectFeature } from '../todosStore/todos.selector';
 
@@ -18,7 +18,7 @@ export class TodoListComponent implements OnInit {
   todos$!: Observable<any>;
   constructor(private store: Store<TodosState>) {}
   ngOnInit(): void {
-    this.todos$ = this.store.select(getTodosState);
+    this.todos$ = this.store.select(selectFeatureTodos);
     // this.todos$ = this.store.select(selectFeature);
   }
 
