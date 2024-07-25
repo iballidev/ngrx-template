@@ -16,7 +16,7 @@ import { getTodoState } from '../todosStore/todos.selector';
 })
 export class TodoListComponent implements OnInit {
   todos$!: Observable<any>;
-  constructor(private store: Store<{ todos: TodoState }>) {}
+  constructor(private store: Store<TodoState>) {}
   ngOnInit(): void {
     this.todos$ = this.store.select(getTodoState);
     // this.todos$ = this.store.select(selectFeature);

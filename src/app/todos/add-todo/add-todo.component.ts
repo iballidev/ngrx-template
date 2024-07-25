@@ -16,7 +16,7 @@ export class AddTodoComponent {
   todo!: string;
   errorMsg!: string;
 
-  constructor(private store: Store<{ todo: TodoState }>) {}
+  constructor(private store: Store<TodoState>) {}
 
   onSubmit() {
     const payload = {
