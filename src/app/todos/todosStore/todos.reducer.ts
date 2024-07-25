@@ -1,7 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import todosActions from './todos.actions';
 
-const initialState = {
+export interface TodoState {
+  todos: any[];
+}
+
+const initialState: TodoState = {
   todos: [],
 };
 

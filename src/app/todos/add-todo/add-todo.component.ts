@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import todosActions from '../todosStore/todos.actions';
+import { TodoState } from '../todosStore/todos.reducer';
 
 @Component({
   selector: 'app-add-todo',
@@ -15,7 +16,7 @@ export class AddTodoComponent {
   todo!: string;
   errorMsg!: string;
 
-  constructor(private store: Store<{ todo: any }>) {}
+  constructor(private store: Store<{ todo: TodoState }>) {}
 
   onSubmit() {
     const payload = {
