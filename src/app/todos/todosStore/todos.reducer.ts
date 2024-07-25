@@ -1,15 +1,12 @@
 import { createReducer, on } from '@ngrx/store';
 import todosActions from './todos.actions';
+import { TodosState } from './todos.state';
 
-export interface TodoState {
-  todos: any[];
-}
-
-const initialState: TodoState = {
+const initialState: TodosState = {
   todos: [],
 };
 
-const todosReducer = createReducer(
+const _todosReducer = createReducer(
   initialState,
   // on(todosActions.loadTodo, (state: any) => state),
   on(todosActions.addTodo, (state: any, action: any) => {
@@ -41,4 +38,6 @@ const todosReducer = createReducer(
   })
 );
 
-export default { todosReducer };
+export function todosReducer(state: any, action: any) {
+  return _todosReducer(state, action);
+}

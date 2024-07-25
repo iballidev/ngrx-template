@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { CounterState } from '../counterStore/counter.state';
+import { getCounterState } from '../counterStore/counter.selector';
 
 @Component({
   selector: 'app-screen',
@@ -12,11 +14,11 @@ import { Observable } from 'rxjs';
 })
 export class ScreenComponent implements OnInit {
   @Input() count: number = 0;
-  count$!: Observable<{ counter: number }>;
+  count$!: Observable<CounterState>;
 
-  constructor(private store: Store<{ counter: { counter: number } }>) {}
+  constructor(private store: Store<CounterState>) {}
 
   ngOnInit(): void {
-    this.count$ = this.store.select('counter');
+    this.count$ = this.store.select(getCounterState);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import counterActions from '../counterStore/counter.actions';
+import { CounterState } from '../counterStore/counter.state';
 
 @Component({
   selector: 'app-controls',
@@ -25,7 +26,7 @@ export class ControlsComponent {
   //   this.reset.emit();
   // }
 
-  constructor(private store: Store<{ counter: {counter: number} }>) {}
+  constructor(private store: Store<CounterState>) {}
 
   handleIncrease() {
     this.store.dispatch(counterActions.increment());
