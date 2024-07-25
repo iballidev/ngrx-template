@@ -8,16 +8,15 @@ import { provideStore } from '@ngrx/store';
 import { provideHttpClient } from '@angular/common/http';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appReducer } from './store/index.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { PostsEffects } from './posts/postStore/posts.effect';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideHttpClient(),
     provideRouter(routes),
     provideStore(appReducer),
-    // provideStore({
-    //     counter: counterReducer.counterReducer,
-    //     todos: todosReducer.todosReducer,
-    // }),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideEffects(PostsEffects)
 ],
 };

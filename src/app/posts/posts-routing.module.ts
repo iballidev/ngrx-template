@@ -4,11 +4,17 @@ import { PostsComponent } from './posts.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { provideEffects } from '@ngrx/effects';
+import { PostsEffects } from './postStore/posts.effect';
+// import { provideStore } from '@ngrx/store';
 
 const routes: Routes = [
   {
     path: '',
     component: PostsComponent,
+    // providers: [
+    //   provideEffects(PostsEffects)
+    // ],
     children: [
       {
         path: '',

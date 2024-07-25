@@ -1,38 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../services/post.service';
+import { Store } from '@ngrx/store';
+import { PostsState } from '../postStore/posts.state';
+import postsActions from '../postStore/posts.actions';
+import { Observable } from 'rxjs';
+import { getPostsState } from '../postStore/posts.selector';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.scss',
 })
 export class PostDetailsComponent implements OnInit {
-  post: any;
-  constructor(private route: ActivatedRoute, private _postSvc: PostService) {}
+  post$!: Observable<any>;
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<PostsState>
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((param: any) => {
-      console.log('param: ', param);
       let postId = param.postId;
-      console.log('postId: ', postId);
       this.getPostDetails(postId);
     });
   }
 
   getPostDetails(id: string) {
-    this._postSvc.getPostDetails(id).subscribe({
-      next: (response: any) => {
-        if (response) {
-          console.log('response: ', response);
-          this.post = response
-        }
-      },
-      error: (err: any) => {
-        console.log('Error: ', err);
-      },
-    });
+    this.store.dispatch(postsActions.loadPostDetails({ id }));
+    this.post$ = this.store.select(getPostsState);
   }
 }

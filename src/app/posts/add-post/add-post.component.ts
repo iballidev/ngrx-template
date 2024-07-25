@@ -9,6 +9,9 @@ import {
 } from '@angular/forms';
 import { Post, PostService } from '../../services/post.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { PostsState } from '../postStore/posts.state';
+import postsActions from '../postStore/posts.actions';
 
 @Component({
   selector: 'app-add-post',
@@ -23,15 +26,13 @@ export class AddPostComponent implements OnInit {
   imgUrl: any;
   isReadyToBeSaved!: boolean;
   isFile!: boolean;
-  constructor(private fb: FormBuilder, private _postSvc: PostService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<PostsState>
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
-
-    console.log('this.label: ', this.label);
-    console.log('this.imgUrl: ', this.imgUrl);
-    console.log('this.isReadyToBeSaved: ', this.isReadyToBeSaved);
-    console.log('this.isFile: ', this.isFile);
   }
 
   buildForm() {
@@ -43,11 +44,7 @@ export class AddPostComponent implements OnInit {
   }
 
   onChange($event: any) {
-    console.log('$event: ', $event);
-
     let rawImg = $event.target.files[0];
-    console.log('rawImg: ', rawImg);
-
     const reader = new FileReader();
 
     reader.readAsDataURL(rawImg);
@@ -62,10 +59,10 @@ export class AddPostComponent implements OnInit {
   }
 
   uploadImage() {
-    console.log('this.label: ', this.label);
-    console.log('this.imgUrl: ', this.imgUrl);
-    console.log('this.isReadyToBeSaved: ', this.isReadyToBeSaved);
-    console.log('this.isFile: ', this.isFile);
+    // console.log('this.label: ', this.label);
+    // console.log('this.imgUrl: ', this.imgUrl);
+    // console.log('this.isReadyToBeSaved: ', this.isReadyToBeSaved);
+    // console.log('this.isFile: ', this.isFile);
   }
 
   onSubmit(data: FormGroup) {
@@ -75,17 +72,7 @@ export class AddPostComponent implements OnInit {
         featuredImage: this.imgUrl,
       };
 
-      this._postSvc.sendPost(payload).subscribe({
-        next: (response: any) => {
-          if (response) {
-            data.reset();
-            this.router.navigate(['/posts']);
-          }
-        },
-        error: (err: any) => {
-          console.log('Error: ', err);
-        },
-      });
+      this.store.dispatch(postsActions.addPost({ post: payload }));
     }
   }
 

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PostsState } from '../postStore/posts.state';
+import { Store } from '@ngrx/store';
+import postsActions from '../postStore/posts.actions';
+import { Observable } from 'rxjs';
+import { getPostsState } from '../postStore/posts.selector';
 
 @Component({
   selector: 'app-post-list',
@@ -12,19 +17,11 @@ import { CommonModule } from '@angular/common';
 })
 export class PostListComponent implements OnInit {
   posts!: any[];
-  constructor(private _postSvc: PostService) {}
+  posts$!: Observable<any>;
+  constructor(private store: Store<PostsState>) {}
 
   ngOnInit(): void {
-    this._postSvc.getPosts().subscribe({
-      next: (response: any) => {
-        if (response) {
-          console.log('response: ', response);
-          this.posts = response;
-        }
-      },
-      error: (err: any) => {
-        console.log('Error: ', err);
-      },
-    });
+    this.store.dispatch(postsActions.loadPosts());
+    this.posts$ = this.store.select(getPostsState);
   }
 }
