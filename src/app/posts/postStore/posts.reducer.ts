@@ -19,7 +19,6 @@ const _postsReducer = createReducer(
     };
   }),
   on(postsActions.loadPostsSuccess, (state, action) => {
-    console.log('action.payload: ', action.payload);
     return {
       ...state,
       posts: action.payload,
@@ -42,7 +41,6 @@ const _postsReducer = createReducer(
     };
   }),
   on(postsActions.loadPostDetailsSuccess, (state, action) => {
-    console.log('action.payload: ', action.payload);
     return {
       ...state,
       postDetails: action.payload,
